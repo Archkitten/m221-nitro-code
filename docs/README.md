@@ -1,6 +1,7 @@
-# m22p1-anything
+# m22p1-nitro-code
 Project Owner: Mr. Mort
-![image](https://user-images.githubusercontent.com/86278850/158843387-27cbd166-57bc-494e-9eaa-0c177ad91bf6.png)
+
+[Jobs, teams, and plans](https://github.com/Archkitten/m221-nitro-code/wiki/Teams,-Plans,-Jobs)
 
 # Plans
 * Maven project that can run and deployed
