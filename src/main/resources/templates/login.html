@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
+
+<head><div layout:fragment="metadata" th:remove="tag">
+    <!-- Start of head content specific to page -->
+    <title>TaskE | Login</title>
+    <!-- End of head content specific to page -->
+</div></head>
+
+<style>
+</style>
+
+<body><div layout:fragment="content" th:remove="tag">
+    <!-- Start of body content specific to page -->
+    <br>
+    <div class="container">
+        <div id="loginRow" class="row justify-content-center align-items-center">
+            <div id="loginBox" class="col-md-5 border-dark fg-elm">
+                <h1 class="text-center m-3 fw-bold">Login</h1>
+                <div th:if="${param.error != null}" class="text-light border border-danger rounded px-2 py-1 text-center" style="background-color: rgb(255,0,0, 0.2)">
+                    Incorrect Username or Password
+                </div>
+                <form method="POST" name="login" action="/login" id="loginForm">
+                    <div class="form-group mb-3">
+                        <label for="inputUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="inputUsername" name="username"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" name="password"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- End of body content specific to page -->
+</div></body>
+
+</html>

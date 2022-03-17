@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
+
+<head><div layout:fragment="metadata" th:remove="tag">
+    <!-- Start of head content specific to page -->
+    <title>TaskE | Kanban</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/kanbanMain.css" th:href="@{/css/kanbanMain.css}" media="all" />
+    <!-- End of head content specific to page -->
+</div></head>
+
+<!-- layout::fragment="content" is heart of ThymeLeaf layout -->
+<body><div layout:fragment="content" th:remove="tag">
+    <!-- Start of body content specific to page -->
+    <div id="spring_intro" class="articles" style="margin: 30px;">
+        <div>
+            <h1><strong>Kanban</strong></h1>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" onclick="addColumn()">+ Add Column</button>
+        </div>
+        <div id="colContainer">
+
+            <template id="nc-template">
+                <div id="noteContainer" class="noteContainer">
+                    <div style="overflow:hidden;">
+                        <button style="float: right; margin: 1px;" type="button" class="btn btn-outline-primary btn-small kan-button" data-toggle="modal" onclick="addNote(this)">+</button>
+                        <button style="float: right; margin: 1px;" type="button" class="btn btn-outline-danger btn-small kan-button" data-toggle="modal" onclick="deleteColumn(this)">x</button>
+                        <div style="float: left; position:relative;">
+                            <h4><input class="input noteContainerTitle" style="width: 310px;position:absolute;" placeholder="Title"></h4>
+                        </div>
+                    </div>
+                    <div style="overflow-wrap: normal;"></div>
+                </div>
+            </template>
+
+            <template id="note-template">
+                <div class="note">
+                    <div style="padding:3px;">
+                        <div style="position:relative;">
+                            <button type="button" class="btn btn-outline-danger btn-small kan-button" data-toggle="modal" onclick="deleteNote(this)">x</button>
+                            <h5 style="display: inline; position:absolute;"><input class="input" style="width: 196px; padding-left: 5px;" placeholder="Title"></h5>
+                        </div>
+                    </div>
+                    <div><textarea class="textarea" placeholder="Body"></textarea></div>
+                </div>
+            </template>
+
+        </div>
+
+
+        <script src="./js/kanban.js" th:src="@{/js/kanban.js}"></script>
+
+    </div>
+    <!-- End of body content specific to page -->
+</div></body>
+
+</html>

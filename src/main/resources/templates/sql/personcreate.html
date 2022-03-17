@@ -1,0 +1,49 @@
+<!-- This page is illustrative and contains ideas about HTML formatting -->
+<!DOCTYPE HTML>
+<!-- Signals to the Layout Dialect which layout should be used to decorate this View -->
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
+
+<head><div layout:fragment="metadata" th:remove="tag">
+  <title>Person Form</title>
+</div></head>
+
+<!-- layout::fragment="content" is heart of ThymeLeaf layout -->
+<body><div layout:fragment="content" th:remove="tag" style="padding-bottom: 50px;">
+  <div class="contact" style="height: 35vh;">
+    <div class="row justify-content-center" style="margin: 2%;">
+      <h1 class="text-center m-3"><strong> Welcome to TaskE!</strong></h1>
+      <div id="loginBox" class="col-md-5 border-dark fg-elm-nh">
+        <h3 class="text-center m-3"><strong>Create a free account today!</strong></h3>
+      <!-- ThymeLeaf allows person abject of the Class Person to be acted upon by the form
+       This is known as a “bean-backed form” or "form-backing bean".
+          th:object - the backend form object (bean object)
+       There are fields in the Person bean,  Get started with dialiects in 5 minutes -- https://www.thymeleaf.org/doc/articles/standarddialect5minutes.html
+          th:field="*{name}"
+          th:field="*{age}"
+          th:field="*{dob}"
+       Each field has supporting line to show errors in validation
+          th:errors - form input errors added when validation errors occur
+       .-->
+        <form action="#" th:action="@{/sql/personcreate}" th:object="${person}" method="POST">
+          <div class="form-group mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input id="inputEmail" class="form-control" type="text" th:field="*{email}" />
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">EMail Error</div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="inputPassword" class="form-label">Password</label>
+            <input id="inputPassword" class="form-control" type="text" th:field="*{password}" />
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div></body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
+
+<head><div layout:fragment="metadata" th:remove="tag">
+    <!-- Start of head content specific to page -->
+    <title>TaskE | Admin Page</title>
+    <!-- End of head content specific to page -->
+</div></head>
+
+<!-- layout::fragment="content" is heart of ThymeLeaf layout -->
+<body><div layout:fragment="content" th:remove="tag">
+    <!-- Start of body content specific to page -->
+    <div id="spring_intro" class="articles" style="margin: 30px;">
+
+        <p th:text="${result}" style="color:lime"></p>
+
+        <h6>Check For a User-----------------------------------------------------------------</h6>
+
+        <div th:if="${param.error}">
+            User was not added.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{adminCheck}" method="get">
+            <div><label> User Name : <input type="text" name="username"/> </label></div>
+
+            <div><input type="submit" value="Check"/></div>
+        </form>
+
+        <h6>Add User-----------------------------------------------------------------</h6>
+
+        <div th:if="${userExists}">
+            Username exists. Change the username and try again.
+        </div>
+
+        <div th:if="${param.error}">
+            User was not added.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/adminAdd}" method="post">
+            <div><label> User Name : <input type="text" name="username"/> </label></div>
+            <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div><label> Role: <input type="text" name="role"/> </label></div>
+
+
+            <div><input type="submit" value="Add"/></div>
+        </form>
+
+        <h6>Update User -----------------------------------------------------------------</h6>
+
+        <div th:if="${param.error}">
+            User was not added.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/adminUpdate}" method="post">
+            <div><label> User Name : <input type="text" name="username"/> </label></div>
+            <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div><label> Role: <input type="text" name="role"/> </label></div>
+
+
+            <div><input type="submit" value="Update"/></div>
+        </form>
+
+        <h6>Delete User-----------------------------------------------------------------</h6>
+
+        <div th:if="${param.error}">
+            User was not added.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{adminDelete}" method="post">
+            <div><label> User Name : <input type="text" name="username"/> </label></div>
+
+            <div><input type="submit" value="Delete"/></div>
+        </form>
+
+        <h6>-----------------------------------------------------------------</h6>
+
+         End of body content specific to page
+    </div>
+</div></body>
+
+</html>

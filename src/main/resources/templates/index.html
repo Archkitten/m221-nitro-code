@@ -1,0 +1,36 @@
+<!-- This page is illustrative and contains ideas about HTML formatting -->
+<!DOCTYPE HTML>
+<!-- Signals to the Layout Dialect which layout should be used to decorate this View -->
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
+
+<head><div layout:fragment="metadata" th:remove="tag">
+    <title>TaskE | Home</title>
+</div></head>
+
+<!-- layout::fragment="content" is heart of ThymeLeaf layout -->
+<body><div layout:fragment="content" th:remove="tag">
+    <!-- Start of body content specific to page -->
+    <div id="spring_intro" class="articles" style="margin: 30px;">
+        <h1><strong>TaskE</strong></h1>
+        <h4>What is TaskE?</h4>
+        <h6>TaskE was designed as a to-do list project, built to keep track of assignments with the help of your friends.</h6>
+        <h6>Our planned features are to have:</h6>
+        <ol>
+            <li>A completed Home page and About Us page.</li>
+            <li>A way to sign up or log in, as well as a way to set friends.</li>
+            <li>A personal task board, with a way to create new tasks, check tasks as complete, and switch the view from weekly to monthly.</li>
+            <li>The different types of tasks can be weekday tasks, due date tasks, everyday tasks, weekly tasks, monthly tasks, weekend tasks, and linked tasks.</li>
+            <li>There might also be a way to follow a group task board, and recieve tasks from it.</li>
+            <li>There is also planned to be a leaderboard that can help with task completion and motivation.</li>
+        </ol>
+        <h4>Why was TaskE created?</h4>
+        <h6>TaskE was created as a project for AP Computer Science A, helping build the collaboration for our team and supporting our intended audience.</h6>
+        <h4>Will TaskE be finished or scrapped?</h4>
+        <h6>It is possible that TaskE might need to be scrapped in the future if it doesn't fit or if we're unable to do it.</h6>
+        <h6>However, we're working hard to make this website idea a reality!</h6>
+    </div>
+    <!-- End of body content specific to page -->
+</div></body>
+
+</html>

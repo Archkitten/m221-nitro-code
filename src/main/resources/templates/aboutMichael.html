@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
+
+<head><div layout:fragment="metadata" th:remove="tag">
+    <!-- Start of head content specific to page -->
+    <title>TaskE | About Michael</title>
+    <style>
+        #image-output {
+            max-width: 90vw;
+            max-height: 100vh;
+        }
+    </style>
+    <!-- End of head content specific to page -->
+</div></head>
+
+<!-- layout::fragment="content" is heart of ThymeLeaf layout -->
+<body><div layout:fragment="content" th:remove="tag">
+    <!-- Start of body content specific to page -->
+    <div id="spring_intro" class="articles" style="margin: 30px;">
+        <h1><strong>About Michael</strong></h1>
+
+        <div class="contact" style="height: 35vh;">
+            <div class="row justify-content-left" style="margin: 2%;">
+                <form action="/aboutMichael" method="GET" id="greetForm">
+                    <div>
+                        <label for="greetField">Type a greeting name?</label>
+                        <input name="name" id="greetField">
+                        <button>Greetings!</button>
+                        <p th:text="'Greetings, ' + ${name} + '!'"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <form id="image-input-form" action="/uploadfile" method="POST" enctype="multipart/form-data">
+            <input name="imageData" type="file" />
+            <button onclick="uploadfile()">Submit</button>
+        </form>
+
+        <img id="image-output" />
+
+        <br />
+        <hr />
+        <br />
+
+        <div id="test-password">
+            <form action="/aboutMichael" method="GET">
+                <h3>Check password</h3>
+                <input name="password" type="text" id="password" />
+                <input type="submit" value="submit" />
+            </form>
+            <div class="col-md-6">
+                <h3>Algorithm comparison</h3>
+                <table class="mx-auto">
+                    <tr>
+                        <th scope="col">Method</th>
+                        <!-- <th scope="col">Time</th> -->
+                        <th scope="col">Found</th>
+                        <!-- <th scope="col">List</th> -->
+                    </tr>
+                    <tr th:each="cp : ${cpList}">
+                        <td th:text="${cp.getName()}"></td>
+                        <!-- <td th:text="${cp.getTimeElapsed()}"></td> -->
+                        <td th:text="${cp.isInWordlists() ? 'true' : 'false'}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h3><strong>Michael</strong></h3>
+        <ol style="list-style: none;">
+            <li>I like to play RPG maker games. Recommendations: OneShot, Mogeko's castle, and Lieat. I got carred by jon</li>
+        </ol>
+
+
+        <script>
+            let form = document.getElementById("image-input-form");
+            let imageOutput = document.getElementById("image-output");
+            const PNGbase64Magic = "data:image/png;base64,"
+            form.addEventListener("submit", e => e.preventDefault());
+            
+            async function uploadfile() {
+                let data = await (await fetch('/uploadfile', {
+                    method: 'POST',
+                    body: new FormData(form)
+                })).text();
+
+                imageOutput.src = PNGbase64Magic + data;
+            }
+        </script>
+    </div>
+    <!-- End of body content specific to page -->
+</div></body>
+
+</html>

@@ -1,0 +1,69 @@
+body, html {padding: 0; margin: 0; overflow-x: hidden; height: 100%;}
+
+.colors {
+    --background: #282a36;
+    --selected: #44475a;
+    --foreground: #f8f8f2;
+    --comment: #6272a4;
+    --cyan: #8be9fd;
+    --green: #50fa7b;
+    --orange: #ffb86c;
+    --pink: #bd93f9;
+    --red: #bd93f9;
+    --yellow: #f1fa8c;
+}
+
+#colContainer {
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.noteContainer {
+    height: auto;
+    width: 50%;
+    border-radius: 25px;
+    background-color: #44475a;
+    padding: 25px;
+    display: inline-grid;
+    margin: 1%;
+    animation: slide-up 0.4s ease;
+    overflow:hidden;
+}
+.noteContainer::-webkit-scrollbar {display: none;}
+.noteContainer {-ms-overflow-style: none;scrollbar-width: none;}
+
+.note {
+    width: 250px;
+    height: 250px;
+    border-radius: 13px;
+    background-color: #6272a4;
+    margin: 5px;
+    padding: 5px;
+    float: left;
+    animation: slide-up 0.4s ease;
+}
+
+.textarea, .input {
+    background-color: transparent;
+    border: none;
+    color: var(--foreground);
+}
+.textarea:focus,.input:focus {outline: none;}
+
+.textarea {
+    height: 194px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    resize: none;
+}
+
+.kan-button {
+    font-family: monospace;
+    height:27px;
+    width:27px;
+    padding:0px 5px 5px 5px !important;
+    border-radius: 14px !important;
+}
