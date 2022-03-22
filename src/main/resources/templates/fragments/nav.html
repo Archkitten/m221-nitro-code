@@ -24,60 +24,17 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/leaderboard">Leaderboard <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/todo">To-Do List <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/kanban">Kanban Board <span class="sr-only">(current)</span></a>
-            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    About Us
+                    Nitro Code
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/aboutAkhil">Akhil</a>
-                    <a class="dropdown-item" href="/aboutArch">Arch</a>
-                    <a class="dropdown-item" href="/aboutMichael">Michael</a>
-                    <a class="dropdown-item" href="/aboutJonathan">Jonathan</a>
+                    <a class="dropdown-item" href="/nitrocode">Java 1</a>
+                    <a class="dropdown-item" href="/nitrocode">Java 2</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarPBL" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Minilabs
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/dne">404 error</a>
-                    <a class="dropdown-item" href="/birds">Birds</a>
-                    <a class="dropdown-item" href="/greet">Greet</a>
-                    <a class="dropdown-item" href="/binary">Binary</a>
-                    <a class="dropdown-item" href="/image">Image</a>
-                    <a class="dropdown-item" href="/SinAlgorithm">Sin algorithm</a>
-                    <a class="dropdown-item" href="/colorScale">Color Scale</a>
-                    <a class="dropdown-item" href="/rapidApi">RapidAPI</a>
-                    <a class="dropdown-item" href="/sql/person">Person SQL</a>
-                    <a class="dropdown-item" href="/akhilArchASCII">Akhil Arch ASCII</a>
-                </div>
-            </li>
-            <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
-                <a class="nav-link" href="/adminPage">Admin Page</a>
-            </li>
         </ul>
-        <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
-                <li class="nav-item">
-                    <a class="nav-link" href="/" sec:authentication="name"></a>
-               </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
-                </li>
-        </ul>
-            <ul class="navbar-nav ml-auto" sec:authorize="isAnonymous()">
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item border border-white rounded">
-                    <a class="nav-link" href="/sql/personcreate">Sign Up</a>
-                </li>
-            </ul>
         <!-- Dark mode action -->
         <div class="custom-control custom-switch">
             <input type="checkbox" onclick="darkFunction()" class="custom-control-input" id="darkSwitch">
