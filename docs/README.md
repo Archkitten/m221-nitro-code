@@ -28,5 +28,6 @@ Project Owner: Mr. Mort
 | [Eshaan Parlikar](https://krispykremesavage.github.io/) | Technical Officer  | [Commits](https://github.com/Archkitten/m22p1-nitro-code/commits?author=KrispyKremeSavage) |
 
 | Week # | Team Project | 
+| :----- | -----------: |
 | Week 0 | [Idea and plan](https://github.com/Archkitten/m22p1-nitro-code/wiki) | 
 | Week 1 | [Crossover](https://github.com/Archkitten/m22p1-nitro-code/issues/9) |
