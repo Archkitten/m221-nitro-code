@@ -7,3 +7,9 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# maven compiled 
+/target
+
+# VIM temp file
+*.swp
