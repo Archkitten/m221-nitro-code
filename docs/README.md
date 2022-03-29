@@ -16,6 +16,7 @@ Project Owner: Mr. Mort
 * User enters home page
 * Choose what they want to do
 * Get points if they did good in any feature we have in the website
+* Have some type of features that explain data bases like sql data bases
 
 # Team
 
