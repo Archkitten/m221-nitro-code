@@ -21,6 +21,7 @@ Project Owner: Mr. Mort
 * 
 Reflection:
 - Ask our sponsor, Mr. Mort, what he would like to see in the project. This includes a feature teaching students about an SQL data base. 
+- We will also have some ways to learn code. This includes more PBL features teaching different aspects such as data bases, or asynch operations. This can be taught through things like Videos, or in depth passages with examples and the students can also practice on the website itself. They can practice with things like practice problems. 
 # Team
 
 | Team Github    | Teamrole  | Commits |
