@@ -11,6 +11,7 @@ Project Owner: Mr. Mort
 * Create Nitro code
 * Create login
 * Add leaderboard
+* To maintain site longterm, it will be deployed. And occasional updates by team members to ensure site is running fine.
 
 # User-side plan
 * User enters home page
