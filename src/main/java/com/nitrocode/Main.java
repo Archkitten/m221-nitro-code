@@ -1,4 +1,4 @@
-package com.example.sping_portfolio;
+package com.nitrocode;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

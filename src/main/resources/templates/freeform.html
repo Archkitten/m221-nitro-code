@@ -1,28 +1,44 @@
-<!-- This page is illustrative and contains ideas about HTML formatting -->
 <!DOCTYPE HTML>
 <!-- Signals to the Layout Dialect which layout should be used to decorate this View -->
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}" lang="en">
 
+<!-- <head> -->
 <head><div layout:fragment="metadata" th:remove="tag">
   <title>NitroCode | Home</title>
 </div></head>
 
-<body>
-
-<div class="container p-3 my-3 bg-dark text-light rounded">
-
-  <form action="" id="input" method="POST">
-    <label for="commandInputId" style="color:black">{{ currentTerminal }}</label>
-    <input name="commandInput" id="commandInputId" type="text" class="input-box bg-dark" style="color:black" autocomplete="off" autofocus>
-  </form>
-
-  <div>
-    <br>
-    <h6 style="color:black">{{ commandOutput1 }}ㅤ</h6>
+<!-- <body> -->
+<body><div layout:fragment="content" th:remove="tag">
+  <!-- Page specific body additions -->
+  <div id="spring_intro" class="articles" style="margin: 30px;text-align:center;">
+    <h1><strong>Free Form</strong></h1>
   </div>
-</div>
 
-</body>
+  <p th:text="${question}"></p>
+
+  <div layout:fragment="content" th:remove="tag">
+    <!-- Start of body content specific to page -->
+    <div class="contact" style="height: 35vh;">
+      <div class="row justify-content-left" style="margin: 2%;">
+
+        <form action="/freeform" method="GET" id="greetForm">
+          <div>
+            <label for="greetField">Answer:</label>
+            <input name="UserInput" id="greetField" autocomplete="off" autofocus>
+            <button>Submit</button>
+            <p th:text="'Result: ' + ${output}"></p>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+  </body>
+  <!-- End of body content specific to page -->
+</div>
 
 </html>
