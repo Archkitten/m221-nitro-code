@@ -4,6 +4,15 @@
 
 body {
   background-color: #161320;
+  margin: 0 auto;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
