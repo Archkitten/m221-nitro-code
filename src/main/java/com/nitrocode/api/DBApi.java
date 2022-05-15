@@ -8,10 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.sql.SQLException;
-
 import com.nitrocode.db.Database;
 import com.nitrocode.db.DBExpection;
+import com.nitrocode.db.Hashing;
 
 @Controller
 public class DBApi {
@@ -39,6 +38,27 @@ public class DBApi {
         return "{ \"code\": 201,\"message\": \"user created successfully\" }";
     }
 
-    // @PostMapping("/api/login")
+    @PostMapping("/api/login")
+    @ResponseBody
+    public String login(
+        @RequestParam(name="username", required=true, defaultValue="...") String username, 
+        @RequestParam(name="password", required=true, defaultValue="...") String password, 
+        Model model) {
+
+        // login
+        try {
+            // Database.login(username, password);
+            String hashedPassword = Database.get("user_profiles", username, "password");
+
+            if(!Hashing.checkPassword(password, hashedPassword)) {
+                return "{ \"code\": 401,\"message\": \"login failed\" }";
+            }
+
+        } catch(DBExpection e) {
+            return "{ \"code\": 401,\"message\": \" " + e.getMessage() + "\" }";
+        }
+
+        return "{ \"code\": 200,\"message\": \"login successful\" }";
+    }
     
 }

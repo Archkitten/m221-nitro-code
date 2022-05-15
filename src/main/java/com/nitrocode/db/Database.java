@@ -64,7 +64,7 @@ public class Database {
 	}
 
 		// potentially vunleriable to sql injection attack
-	public static String get(String table, String username, String column) {
+	public static String get(String table, String username, String column) throws DBExpection {
 		String query = "SELECT " + column + " FROM " + table 
 						+ " WHERE username = '" + username + "';";
 
@@ -75,8 +75,13 @@ public class Database {
 			result = stmt.getResultSet().getString(column);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Error getting data: " + e.getMessage());
+			throw new DBExpection("Error getting data: " + e.getMessage());
 		}
+
+		if(result.isEmpty()) {
+			throw new DBExpection("Error getting data: " + username + " not found");
+		}
+
 		return result;
 	}
 
