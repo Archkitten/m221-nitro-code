@@ -13,6 +13,8 @@ import java.sql.SQLException;
 
 import java.io.File;
 
+import com.nitrocode.db.DBExpection;
+
 public class Database {
 
 	private static final String databasePath = "test.db";
@@ -30,7 +32,6 @@ public class Database {
 			System.out.println("Error: " + e.getMessage());
 		}
 
-		// now we set up a set of fairly basic string variables to use in the body of the code proper
 		String sJdbc = "jdbc:sqlite";
 		String sDbUrl = sJdbc + ":" + databasePath;
 
@@ -64,7 +65,9 @@ public class Database {
 
 		// potentially vunleriable to sql injection attack
 	public static String get(String table, String username, String column) {
-		String query = "SELECT " + column + " FROM " + table + " WHERE username = '" + username + "';";
+		String query = "SELECT " + column + " FROM " + table 
+						+ " WHERE username = '" + username + "';";
+
 		String result = "";
 		try {
 			Statement stmt = conn.createStatement();
@@ -77,25 +80,41 @@ public class Database {
 		return result;
 	}
 
-	public static void addUser(String username, String password, String role, String nickname) {
-		String query = "INSERT INTO user_profiles (username, password, role, nickname) VALUES ('" + username + "', '" + password + "', '" + role + "', '" + nickname + "');";
+	public static void addUser(String username, 
+								String password, 
+								String role, 
+								String nickname) 
+								throws DBExpection {
+		String query = "INSERT INTO user_profiles" 
+							+ "(username, password, role, nickname)"
+							+ "VALUES ('" 
+								+ username + "', '" 
+								+ password + "', '" 
+								+ role + "', '" 
+								+ nickname 
+							+ "');";
+
 		try {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
 			System.err.println("Error adding user: " + e.getMessage());
+			throw new DBExpection("Error adding user: " + e.getMessage());
 		}
 	}
 
-	public static void setUserPassword(String username, String password) {
-		String query = "UPDATE user_profiles SET password = '" + password + "' WHERE username = '" + username + "';";
+	public static void setUserPassword(String username, String password) throws DBExpection {
+		String query = "UPDATE user_profiles SET password = '" 
+							+ password 
+							+ "' WHERE username = '" + username + "';";
+
 		try {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
-		} catch (SQLException e) {
-			System.err.println("Error setting password: " + e.getMessage());
+		} catch(SQLException e) {
+			throw new DBExpection("Error setting password: " + e.getMessage());
 		}
 	}
 
