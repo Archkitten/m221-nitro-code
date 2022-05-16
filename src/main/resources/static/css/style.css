@@ -4,15 +4,18 @@
 
 body {
   background-color: #161320;
-  margin: 0 auto;
 }
 
 .center {
   position: absolute;
   left: 50%;
-  top: 30%;
+  top: 25%;
   transform: translate(-50%, -50%);
   padding: 10px;
+}
+
+h1 {
+  padding: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */
