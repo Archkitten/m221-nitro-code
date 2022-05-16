@@ -8,8 +8,7 @@
 <!-- Begin navigation fragments -->
 <nav id="navbar-background" class="navbar navbar-expand-lg navbar-light nav-light" th:fragment="header">
     <a class="navbar-brand" href="/">
-        <img id="navbar-logo" src="/images/checkAnimationStatic.gif" onmouseover="onHover();" onmouseout="offHover();" th:src="@{/images/checkAnimationStatic.gif}" width="50" height="50" style="color: white" class="d-inline-block align-center" alt="">
-        TaskE
+        <img id="navbar-logo" src="/static/images/logo.png" onmouseover="onHover();" onmouseout="offHover();" width="50" height="50" style="color: white" class="d-inline-block align-center" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -73,10 +72,10 @@
             }
 
             function onHover() {
-                document.getElementById('navbar-logo').src = "/images/checkAnimation.gif"
+                document.getElementById('navbar-logo').src = "/static/images/logo.png"
             }
             function offHover() {
-                document.getElementById('navbar-logo').src = "/images/checkAnimationStatic.gif"
+                document.getElementById('navbar-logo').src = "/static/images/logo.png"
             }
         </script>
     </div>
