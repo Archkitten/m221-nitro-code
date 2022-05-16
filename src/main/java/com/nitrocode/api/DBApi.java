@@ -18,9 +18,9 @@ public class DBApi {
     @PostMapping("/api/adduser")
     @ResponseBody
     public String addUser(
-        @RequestParam(name="username", required=true, defaultValue="...") String username, 
-        @RequestParam(name="nickname", required=true, defaultValue="...") String nickname,
-        @RequestParam(name="password", required=true, defaultValue="...") String password, 
+        @RequestParam(name="username", required=true) String username, 
+        @RequestParam(name="nickname", required=true) String nickname,
+        @RequestParam(name="password", required=true) String password, 
         Model model) {
 
         // add user
@@ -32,17 +32,17 @@ public class DBApi {
                 nickname
             );
         } catch(DBExpection e) {
-            return "{ \"code\": 409,\"message\": \" " + e.getMessage() + "\" }";
+            return "{ \"status\": 409,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        return "{ \"code\": 201,\"message\": \"user created successfully\" }";
+        return "{ \"status\": 201,\"message\": \"user created successfully\" }";
     }
 
     @PostMapping("/api/login")
     @ResponseBody
     public String login(
-        @RequestParam(name="username", required=true, defaultValue="...") String username, 
-        @RequestParam(name="password", required=true, defaultValue="...") String password, 
+        @RequestParam(name="username", required=true) String username, 
+        @RequestParam(name="password", required=true) String password, 
         Model model) {
 
         // login
@@ -51,14 +51,54 @@ public class DBApi {
             String hashedPassword = Database.get("user_profiles", username, "password");
 
             if(!Hashing.checkPassword(password, hashedPassword)) {
-                return "{ \"code\": 401,\"message\": \"login failed\" }";
+                return "{ \"status\": 401,\"message\": \"login failed\" }";
             }
 
         } catch(DBExpection e) {
-            return "{ \"code\": 401,\"message\": \" " + e.getMessage() + "\" }";
+            return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        return "{ \"code\": 200,\"message\": \"login successful\" }";
+        return "{ \"status\": 200,\"message\": \"login successful\" }";
     }
-    
+
+    @PostMapping("/api/logout")
+    @ResponseBody
+    public String logout(
+        @RequestParam(name="username", required=true, defaultValue="...") String username, 
+        Model model) {
+
+        // logout
+        // try {
+        //     // Database.logout(username);
+        //     // todo
+        // } catch(DBExpection e) {
+        //     return "{ \"code\": 401,\"message\": \" " + e.getMessage() + "\" }";
+        // }
+
+        return "{ \"status\": 200,\"message\": \"logout successful\" }";
+    }
+
+    @PostMapping("/api/register")
+    @ResponseBody
+    public String register(
+        @RequestParam(name="username", required=true) String username, 
+        @RequestParam(name="nickname", required=true) String nickname,
+        @RequestParam(name="password", required=true) String password, 
+        Model model) {
+
+        // register
+        try {
+            Database.addUser(
+                username, 
+                password,
+                "user",
+                nickname
+            );
+        } catch(DBExpection e) {
+            return "{ \"status\": 409,\"message\": \"" + e.getMessage() + "\" }";
+        }
+
+        return "{ \"status\": 201,\"message\": \"user created successfully\" }";
+    }
+
 }

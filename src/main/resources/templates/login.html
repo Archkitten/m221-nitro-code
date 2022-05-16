@@ -61,8 +61,11 @@
                                         <div class="form-group">
                                             <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                        </div> -->
+                                        <div class="form-group">
+                                            <input type="text" name="nickname" id="nickname" tabindex="1" class="form-control" placeholder="nickname" value="">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
@@ -86,6 +89,75 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            (function() {
+                let loginForm = document.getElementById("login-form");
+                loginForm.onsubmit = async function(e) {
+                    e.preventDefault();
+
+                    let r = await (
+                        await fetch(
+                            "/api/login", {
+                                method: "POST",
+                                body: new FormData(loginForm)
+                            })
+                    ).json();
+
+                    console.log(r);
+                }
+
+                let registerForm = document.getElementById("register-form");
+                registerForm.onsubmit = async function(e) {
+                    e.preventDefault();
+
+                    // check if username and password are filled
+                    let username = document.getElementById("username").value;
+                    let password = document.getElementById("password").value;
+                    if (username.length == 0 || password.length == 0) {
+                        alert("Username and password are required");
+                        return;
+                    }
+
+                    // checkk confirm password and password match
+                    let confirmPassword = document.getElementById("confirm-password").value;
+                    if (confirmPassword.length == 0 || confirmPassword != password) {
+                        alert("Password and confirm password do not match");
+                        return;
+                    }
+
+                    let r = await (
+                        await fetch(
+                            "/api/register", {
+                                method: "POST",
+                                body: new FormData(registerForm)
+                            })
+                    ).json();
+
+                    console.log(r);
+                }
+
+                // buttons
+                let loginFormLink = document.getElementById("login-form-link");
+                let registerFormLink = document.getElementById("register-form-link");
+                let loginFormDiv = document.getElementById("login-form");
+                let registerFormDiv = document.getElementById("register-form");
+
+                loginFormLink.onclick = function() {
+                    loginFormDiv.style.display = "block";
+                    registerFormDiv.style.display = "none";
+                    loginFormLink.className = "active";
+                    registerFormLink.className = "";
+                }
+
+                registerFormLink.onclick = function() {
+                    loginFormDiv.style.display = "none";
+                    registerFormDiv.style.display = "block";
+                    loginFormLink.className = "";
+                    registerFormLink.className = "active";
+                }
+            })();
+        </script>
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>

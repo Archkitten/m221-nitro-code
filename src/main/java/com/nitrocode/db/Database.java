@@ -10,10 +10,12 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
 import java.io.File;
 
 import com.nitrocode.db.DBExpection;
+import com.nitrocode.db.Hashing;
 
 public class Database {
 
@@ -48,10 +50,11 @@ public class Database {
 		if (!db_exists) {
 			try {
 				Statement stmt = conn.createStatement();
+				// create a table in sqlite database with unique ID, unique username, a role, a nickname, and a password 
 				stmt.executeUpdate(
 				  "CREATE TABLE user_profiles ("
-				+ "		id INTEGER PRIMARY KEY,"
-				+ "		username UNIQUE TEXT,"
+				+ "		id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ "		username TEXT,"
 				+ "		role TEXT,"
 				+ "		nickname TEXT,"
 				+ "		password TEXT"
@@ -68,18 +71,23 @@ public class Database {
 		String query = "SELECT " + column + " FROM " + table 
 						+ " WHERE username = '" + username + "';";
 
+		System.out.println("fuckfukc");
 		String result = "";
 		try {
 			Statement stmt = conn.createStatement();
+			System.out.println("created stmt");
 			stmt.executeQuery(query);
-			result = stmt.getResultSet().getString(column);
+			System.out.println("executed query");
+			ResultSet results = stmt.getResultSet();
+			System.out.println("got results");
+			if(results.next())
+				result = results.getString(column);
+
+			System.out.println(result);
+
 			stmt.close();
 		} catch (SQLException e) {
 			throw new DBExpection("Error getting data: " + e.getMessage());
-		}
-
-		if(result.isEmpty()) {
-			throw new DBExpection("Error getting data: " + username + " not found");
 		}
 
 		return result;
@@ -94,24 +102,32 @@ public class Database {
 							+ "(username, password, role, nickname)"
 							+ "VALUES ('" 
 								+ username + "', '" 
-								+ password + "', '" 
+								+ Hashing.getHash(password) + "', '" 
 								+ role + "', '" 
 								+ nickname 
 							+ "');";
 
 		try {
+            // check user already exists
+			if(get("user_profiles", username, "username").isEmpty()) {
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate(query);
+				stmt.close();
+			} else {
+				throw new DBExpection("Error adding user: " + username + " already exists");
+			}
+
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(query);
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println("Error adding user: " + e.getMessage());
 			throw new DBExpection("Error adding user: " + e.getMessage());
 		}
 	}
 
 	public static void setUserPassword(String username, String password) throws DBExpection {
 		String query = "UPDATE user_profiles SET password = '" 
-							+ password 
+							+ Hashing.getHash(password)
 							+ "' WHERE username = '" + username + "';";
 
 		try {
