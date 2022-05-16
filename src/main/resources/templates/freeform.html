@@ -6,12 +6,6 @@
 
 <head><div layout:fragment="metadata" th:remove="tag">
   <title>NitroCode | Home</title>
-  <script>
-    str = document.getElementById("userInput").value
-    function trees() {
-      document.getElementById("output").innerHTML = "Correct!";
-    }
-  </script>
 </div></head>
 
 <!-- layout::fragment="content" is heart of ThymeLeaf layout -->
@@ -22,11 +16,26 @@
       <h1>Nitro Code</h1>
     </div>
 
-    <input id="userInput" placeholder="if (you are good at coding) { System.out.println('trees'); }"><br>
+    <input id="userInput" placeholder="pillion"><br>
 
     <p id="output"></p>
 
   </div>
+  <script>
+    (function() {
+      let inputEle = document.getElementById("userInput");
+
+      inputEle.onchange = () => {
+        userInput = inputEle.value;
+        if (userInput === "pillion") {
+          document.getElementById("output").innerHTML = "Correct!";
+        }
+        else {
+            document.getElementById("output").innerHTML = "Wrong!";
+          }
+      }
+    })();
+  </script>
   <!-- End of body content specific to page -->
 </div>
 <div layout:fragment="footer">
