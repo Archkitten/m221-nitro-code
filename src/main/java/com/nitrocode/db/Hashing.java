@@ -39,7 +39,7 @@ public class Hashing {
         return null;
     }
 
-    public static String genSessionToken() {
+    public static String getSessionToken() {
         return randomString(32);
     }
 

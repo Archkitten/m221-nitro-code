@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nitrocode.db.Database;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import com.nitrocode.db.DBExpection;
 import com.nitrocode.db.Hashing;
 
@@ -43,7 +47,7 @@ public class DBApi {
     public String login(
         @RequestParam(name="username", required=true) String username, 
         @RequestParam(name="password", required=true) String password, 
-        Model model) {
+        HttpServletResponse response) {
 
         // do nothing if username and password are empty
         if (username.isEmpty() || password.isEmpty()) {
@@ -63,8 +67,16 @@ public class DBApi {
             return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
         }
 
+        String token = Hashing.getSessionToken();
+
+        System.out.println("token: " + token);
+
+        response.addCookie(
+            new Cookie("token", token)
+        );
+
         return "{ \"status\": 200,\"message\": \"login successful\", \"username\": \"" 
-                    + username + "\", \"token\": \"" + Hashing.randomString(32) + "\" }";
+                    + username + "\"}";
     }
 
     @PostMapping("/api/logout")

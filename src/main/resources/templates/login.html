@@ -141,7 +141,6 @@
                 function handleResponse(r) {
                     console.log(r);
                     if (r.status == 200) {
-                        document.cookie = `token=${r.token}; username=${r.username};`;
                         // window.location.href = "/";
                     } else {
                         displayMessage(r.message);
