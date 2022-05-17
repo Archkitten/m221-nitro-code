@@ -19,7 +19,7 @@ import com.nitrocode.db.Hashing;
 
 public class Database {
 
-	private static final String databasePath = "test.db";
+	private static final String databasePath = "databases/nitrocode.db";
 
 	public static Connection conn;
 
@@ -71,20 +71,13 @@ public class Database {
 		String query = "SELECT " + column + " FROM " + table 
 						+ " WHERE username = '" + username + "';";
 
-		System.out.println("fuckfukc");
 		String result = "";
-		try {
+		try {	
 			Statement stmt = conn.createStatement();
-			System.out.println("created stmt");
-			stmt.executeQuery(query);
-			System.out.println("executed query");
-			ResultSet results = stmt.getResultSet();
-			System.out.println("got results");
-			if(results.next())
-				result = results.getString(column);
-
-			System.out.println(result);
-
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				result = rs.getString(column);
+			}
 			stmt.close();
 		} catch (SQLException e) {
 			throw new DBExpection("Error getting data: " + e.getMessage());

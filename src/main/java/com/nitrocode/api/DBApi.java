@@ -45,20 +45,26 @@ public class DBApi {
         @RequestParam(name="password", required=true) String password, 
         Model model) {
 
+        // do nothing if username and password are empty
+        if (username.isEmpty() || password.isEmpty()) {
+            return "{ \"status\": 400,\"message\": \"username and password cannot be empty\" }";
+        }
+
         // login
         try {
             // Database.login(username, password);
             String hashedPassword = Database.get("user_profiles", username, "password");
 
             if(!Hashing.checkPassword(password, hashedPassword)) {
-                return "{ \"status\": 401,\"message\": \"login failed\" }";
+                return "{ \"status\": 401,\"message\": \"invalid username or password\" }";
             }
 
         } catch(DBExpection e) {
             return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        return "{ \"status\": 200,\"message\": \"login successful\" }";
+        return "{ \"status\": 200,\"message\": \"login successful\", \"username\": \"" 
+                    + username + "\", \"token\": \"" + Hashing.randomString(32) + "\" }";
     }
 
     @PostMapping("/api/logout")
@@ -98,7 +104,7 @@ public class DBApi {
             return "{ \"status\": 409,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        return "{ \"status\": 201,\"message\": \"user created successfully\" }";
+        return "{ \"status\": 200,\"message\": \"user created successfully\" }";
     }
 
 }
