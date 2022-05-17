@@ -1,44 +1,46 @@
+<!-- This page is illustrative and contains ideas about HTML formatting -->
 <!DOCTYPE HTML>
 <!-- Signals to the Layout Dialect which layout should be used to decorate this View -->
-<html xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.w3.org/1999/xhtml"
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}" lang="en">
 
-<!-- <head> -->
 <head><div layout:fragment="metadata" th:remove="tag">
   <title>NitroCode | Home</title>
 </div></head>
 
-<!-- <body> -->
+<!-- layout::fragment="content" is heart of ThymeLeaf layout -->
 <body><div layout:fragment="content" th:remove="tag">
-  <!-- Page specific body additions -->
-  <div id="spring_intro" class="articles" style="margin: 30px;text-align:center;">
-    <h1><strong>Free Form</strong></h1>
-  </div>
-
-  <p th:text="${question}"></p>
-
-  <div layout:fragment="content" th:remove="tag">
-    <!-- Start of body content specific to page -->
-    <div class="contact" style="height: 35vh;">
-      <div class="row justify-content-left" style="margin: 2%;">
-
-        <form action="/freeform" method="GET" id="greetForm">
-          <div>
-            <label for="greetField">Answer:</label>
-            <input name="UserInput" id="greetField" autocomplete="off" autofocus>
-            <button>Submit</button>
-            <p th:text="'Result: ' + ${output}"></p>
-          </div>
-        </form>
-
-      </div>
+  <!-- Start of body content specific to page -->
+  <div class="center">
+    <div id="spring_intro" style="margin: 30px;">
+      <h1>Nitro Code</h1>
     </div>
-  </div>
 
-</div>
-  </body>
+    <input id="userInput" placeholder="pillion"><br>
+
+    <p id="output"></p>
+
+  </div>
+  <script>
+    (function() {
+      let inputEle = document.getElementById("userInput");
+
+      inputEle.onchange = () => {
+        userInput = inputEle.value;
+        if (userInput === "pillion") {
+          document.getElementById("output").innerHTML = "Correct!";
+        }
+        else {
+            document.getElementById("output").innerHTML = "Wrong!";
+          }
+      }
+    })();
+  </script>
   <!-- End of body content specific to page -->
 </div>
+<div layout:fragment="footer">
+
+</div>
+</body>
 
 </html>
