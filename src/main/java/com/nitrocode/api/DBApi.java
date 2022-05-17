@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.nitrocode.db.DBExpection;
 import com.nitrocode.db.Hashing;
+import com.nitrocode.sessions.sessionToken;
 
 @Controller
 public class DBApi {
@@ -67,7 +68,7 @@ public class DBApi {
             return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        String token = Hashing.getSessionToken();
+        String token = sessionToken.getSessionToken();
 
         System.out.println("token: " + token);
 
