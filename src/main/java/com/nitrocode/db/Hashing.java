@@ -39,11 +39,7 @@ public class Hashing {
         return null;
     }
 
-    public static String getSessionToken() {
-        return randomString(32);
-    }
-
-    private static String randomString(int length) {
+    public static String randomString(int length) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             sb.append((char) (Math.random() * 26 + 97));

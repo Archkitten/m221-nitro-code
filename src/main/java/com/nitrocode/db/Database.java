@@ -19,7 +19,9 @@ import com.nitrocode.db.Hashing;
 
 public class Database {
 
-	private static final String databasePath = "databases/nitrocode.db";
+	private static final String parentDir = "databases";
+	private static final String dbName = "nitrocode.db";
+	private static final String databasePath = parentDir + File.separator + dbName;
 
 	public static Connection conn;
 
@@ -36,6 +38,12 @@ public class Database {
 
 		String sJdbc = "jdbc:sqlite";
 		String sDbUrl = sJdbc + ":" + databasePath;
+
+		// create parent directory if it doesn't exist
+		File parentDirFile = new File(parentDir);
+		if(!parentDirFile.exists()) {
+			parentDirFile.mkdir();
+		}
 
 		// create a database connection
 		try {
