@@ -60,6 +60,10 @@ public class DBApi {
             // Database.login(username, password);
             String hashedPassword = Database.get("user_profiles", username, "password");
 
+            if(hashedPassword.isEmpty()) {
+                return "{ \"status\": 401,\"message\": \"username or password is incorrect\" }";
+            } 
+            
             if(!Hashing.checkPassword(password, hashedPassword)) {
                 return "{ \"status\": 401,\"message\": \"invalid username or password\" }";
             }
@@ -76,12 +80,18 @@ public class DBApi {
             return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        response.addCookie(
-            new Cookie("token", token)
-        );
+        Cookie tokenCookie = new Cookie("token", token);
+        tokenCookie.setMaxAge(Integer.MAX_VALUE);
 
         response.addCookie(
-            new Cookie("username", username)
+            tokenCookie
+        );
+
+        Cookie usernameCookie = new Cookie("username", token);
+        usernameCookie.setMaxAge(Integer.MAX_VALUE);
+
+        response.addCookie(
+            usernameCookie
         );
 
         return "{ \"status\": 200,\"message\": \"login successful\", \"username\": \"" 

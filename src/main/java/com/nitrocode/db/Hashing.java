@@ -16,6 +16,8 @@ public class Hashing {
     }
 
     public static boolean checkPassword(String password, String hash) {
+        System.out.println("fuck" + hash);
+
         String[] passwordHashes = hash.split(":");
         String salt = passwordHashes[0];
         hash = passwordHashes[1];
