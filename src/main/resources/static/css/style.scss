@@ -24,13 +24,21 @@ body{
   padding-right: 25%;
 }
 
-/* a{
-  padding-top: 5%;
-  padding-bottom: 5%;
-  -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
-  color: green;
+.mainButtons{
+  -webkit-box-reflect: below 0 linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.2));
+  color: black;
+  padding: 5% 24px;
+  border-radius: 8px;
 }
-*/
+
+.b1{
+  background-color: #ABE9B3;
+}
+
+.b2{
+  background-color: #f28fadff;
+}
+
 
 
 h1{
@@ -40,6 +48,8 @@ h1{
 
 p{
   color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .login{
@@ -48,8 +58,6 @@ p{
   font-size: 28px;
   width: 250px;
   font-family: var(--font);
+  border-radius: 8px;
 }
 
-input{
-  padding-top: 5%;
-}
