@@ -70,10 +70,18 @@ public class DBApi {
 
         String token = sessionToken.getSessionToken();
 
-        System.out.println("token: " + token);
+        try {
+            sessionToken.set(username, token);
+        } catch(DBExpection e) {
+            return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
+        }
 
         response.addCookie(
             new Cookie("token", token)
+        );
+
+        response.addCookie(
+            new Cookie("username", username)
         );
 
         return "{ \"status\": 200,\"message\": \"login successful\", \"username\": \"" 

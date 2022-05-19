@@ -24,7 +24,7 @@ public class Hashing {
     }
 
     // hash using sha256
-    private static String hash(String input) {
+    public static String hash(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] messageDigest = md.digest(input.getBytes());
