@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nitrocode.db.Database;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import com.nitrocode.db.DBExpection;
 import com.nitrocode.db.Hashing;
+import com.nitrocode.sessions.sessionToken;
 
 @Controller
 public class DBApi {
@@ -43,7 +48,12 @@ public class DBApi {
     public String login(
         @RequestParam(name="username", required=true) String username, 
         @RequestParam(name="password", required=true) String password, 
-        Model model) {
+        HttpServletResponse response) {
+
+        // do nothing if username and password are empty
+        if (username.isEmpty() || password.isEmpty()) {
+            return "{ \"status\": 400,\"message\": \"username and password cannot be empty\" }";
+        }
 
         // login
         try {
@@ -51,14 +61,31 @@ public class DBApi {
             String hashedPassword = Database.get("user_profiles", username, "password");
 
             if(!Hashing.checkPassword(password, hashedPassword)) {
-                return "{ \"status\": 401,\"message\": \"login failed\" }";
+                return "{ \"status\": 401,\"message\": \"invalid username or password\" }";
             }
 
         } catch(DBExpection e) {
             return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        return "{ \"status\": 200,\"message\": \"login successful\" }";
+        String token = sessionToken.getSessionToken();
+
+        try {
+            sessionToken.set(username, token);
+        } catch(DBExpection e) {
+            return "{ \"status\": 401,\"message\": \"" + e.getMessage() + "\" }";
+        }
+
+        response.addCookie(
+            new Cookie("token", token)
+        );
+
+        response.addCookie(
+            new Cookie("username", username)
+        );
+
+        return "{ \"status\": 200,\"message\": \"login successful\", \"username\": \"" 
+                    + username + "\"}";
     }
 
     @PostMapping("/api/logout")
@@ -98,7 +125,7 @@ public class DBApi {
             return "{ \"status\": 409,\"message\": \"" + e.getMessage() + "\" }";
         }
 
-        return "{ \"status\": 201,\"message\": \"user created successfully\" }";
+        return "{ \"status\": 200,\"message\": \"user created successfully\" }";
     }
 
 }

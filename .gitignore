@@ -13,3 +13,6 @@
 
 # VIM temp file
 *.swp
+
+# databases
+*.db

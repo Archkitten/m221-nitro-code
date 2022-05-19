@@ -7,10 +7,9 @@
 <body>
 <!-- Begin navigation fragments -->
 <nav id="navbar-background" class="navbar navbar-expand-lg navbar-light nav-light" th:fragment="header">
-    <a class="navbar-brand" href="/">
-        <img id="navbar-logo" src="/images/checkAnimationStatic.gif" onmouseover="onHover();" onmouseout="offHover();" th:src="@{/images/checkAnimationStatic.gif}" width="50" height="50" class="d-inline-block align-center" alt="">
-        TaskE
-    </a>
+
+        <img src="/images/logo2.png" width="50" height="50" alt="missing">
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,14 +18,14 @@
         <ul class="navbar-nav mr-auto">
             <!--root menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" style="color: white" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/leaderboard">Leaderboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link" style="color: white" href="/leaderboard">Leaderboard <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Nitro Code
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -36,7 +35,7 @@
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" href="/freeform">Free Form <span class="sr-only">(current)</span></a>
+                <a class="nav-link" style="color: white" href="/freeform">Free Form <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <!-- Dark mode action -->
@@ -73,10 +72,10 @@
             }
 
             function onHover() {
-                document.getElementById('navbar-logo').src = "/images/checkAnimation.gif"
+                document.getElementById('navbar-logo').src = "/static/images/logo.png"
             }
             function offHover() {
-                document.getElementById('navbar-logo').src = "/images/checkAnimationStatic.gif"
+                document.getElementById('navbar-logo').src = "/static/images/logo.png"
             }
         </script>
     </div>

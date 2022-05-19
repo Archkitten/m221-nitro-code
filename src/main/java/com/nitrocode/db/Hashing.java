@@ -24,7 +24,7 @@ public class Hashing {
     }
 
     // hash using sha256
-    private static String hash(String input) {
+    public static String hash(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] messageDigest = md.digest(input.getBytes());
@@ -37,5 +37,13 @@ public class Hashing {
             System.out.println("Error: " + e.getMessage());
         }
         return null;
+    }
+
+    public static String randomString(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            sb.append((char) (Math.random() * 26 + 97));
+        }
+        return sb.toString();
     }
 }
