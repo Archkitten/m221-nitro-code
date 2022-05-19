@@ -1,5 +1,14 @@
+:root {
+  --font: 'JetBrains Mono', monospace;
+}
+
+* {
+  font-family: var(--font);
+}
+
 .f1{
   font-family: 'JetBrains Mono', monospace;
+
 }
 
 body{
@@ -15,21 +24,40 @@ body{
   padding-right: 25%;
 }
 
-/* a{
-  padding-top: 5%;
-  padding-bottom: 5%;
-  -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
-  color: green;
+.mainButtons{
+  -webkit-box-reflect: below 0 linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.2));
+  color: black;
+  padding: 5% 24px;
+  border-radius: 8px;
 }
-*/
+
+.b1{
+  background-color: #ABE9B3;
+}
+
+.b2{
+  background-color: #f28fadff;
+}
+
 
 
 h1{
-  padding: 10px 25% 5% 35%;
-
+  padding: 10px 0 5% 20%;
+  font-size: 96px;
 }
 
 p{
   color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.login{
+  background-color: #ABE9B3;
+  color: black;
+  font-size: 28px;
+  width: 250px;
+  font-family: var(--font);
+  border-radius: 8px;
 }
 
