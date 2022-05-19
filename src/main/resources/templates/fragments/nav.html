@@ -41,6 +41,7 @@
             <li class="nav-item active">
                 <a class="nav-link" id="login" style="color: white" href="/login">Login<span class="sr-only">(current)</span></a>
                 <script>
+                    console.log("Checking for cookie I am the cookie monster")
                     let parsedCookieList = document.cookie.split(";");
                     let splitCookieList = [];
                     for (let c of parsedCookieList) {
