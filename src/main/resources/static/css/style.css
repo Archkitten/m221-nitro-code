@@ -1,3 +1,11 @@
+:root {
+  --font: "JetBrains Mono", monospace;
+}
+
+* {
+  font-family: var(--font);
+}
+
 .f1 {
   font-family: "JetBrains Mono", monospace;
 }
@@ -22,11 +30,24 @@ body {
 }
 */
 h1 {
-  padding: 10px 25% 5% 35%;
+  padding: 10px 0 5% 20%;
+  font-size: 96px;
 }
 
 p {
   color: white;
+}
+
+.login {
+  background-color: #ABE9B3;
+  color: black;
+  font-size: 28px;
+  width: 250px;
+  font-family: var(--font);
+}
+
+input {
+  padding-top: 5%;
 }
 
 /*# sourceMappingURL=style.css.map */
