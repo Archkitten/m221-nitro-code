@@ -37,6 +37,29 @@
             <li class="nav-item active">
                 <a class="nav-link" style="color: white" href="/freeform">Free Form <span class="sr-only">(current)</span></a>
             </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" id="login" style="color: white" href="/login">Login<span class="sr-only">(current)</span></a>
+                <script>
+                    let parsedCookieList = document.cookie.split(";");
+                    let splitCookieList = [];
+                    for (let c of parsedCookieList) {
+                        [key, value] = c.split("=");
+                        splitCookieList[key] = value;
+                    }
+
+                    if (!splitCookieList['token']) {
+                        document.getElementById("login").innerHTML = "Login";
+                    }
+                    else {
+                        document.getElementById("login").innerHTML = "Logout";
+                    }
+                </script>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" style="color: white" href="/notes">Notes<span class="sr-only">(current)</span></a>
+            </li>
         </ul>
         <!-- Dark mode action -->
         <div class="custom-control custom-switch">

@@ -6,6 +6,18 @@
 
 <head><div layout:fragment="metadata" th:remove="tag">
   <title>NitroCode | Code Page</title>
+  <script>
+    let parsedCookieList = document.cookie.split(";");
+    let splitCookieList = [];
+    for (let c of parsedCookieList) {
+      [key, value] = c.split("=");
+      splitCookieList[key] = value;
+    }
+
+    if (!splitCookieList['token']) {
+      window.location.href = "403";
+    }
+  </script>
 </div></head>
 
 <!-- layout::fragment="content" is heart of ThymeLeaf layout -->
