@@ -38,8 +38,9 @@ body {
 }
 
 h1 {
-  padding: 10px 0 5% 20%;
+  padding: 10px 0 5% 25%;
   font-size: 96px;
+  color: white;
 }
 
 p {
