@@ -38,4 +38,9 @@ public class Scoreboard {
         return totalSpeed;
     }
 
+    public void reset(int playerId) {
+        speedtoPlayerMapping.get(playertoSpeedMapping.get(playerId)).remove(playerId);
+        playertoSpeedMapping.put(playerId, 0);
+    }
+
 }
