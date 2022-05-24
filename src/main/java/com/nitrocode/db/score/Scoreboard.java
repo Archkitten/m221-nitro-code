@@ -24,4 +24,18 @@ public class Scoreboard {
         speedtoPlayerMapping.computeIfAbsent(speed, i -> new HashSet<>()).add(playerId);
     }
 
+    public int top(int I) {
+        int totalSpeed = 0;
+        for (Integer currSpeed : speedtoPlayerMapping.keySet()) {
+            int totalPlayersWithSpeed = speedtoPlayerMapping.get(currSpeed).size();
+            int playersRemaining = Math.min(I, totalPlayersWithSpeed);
+            totalSpeed += playersRemaining * currSpeed;
+            I -= playersRemaining;
+            if (I == 0) {
+                break;
+            }
+        }
+        return totalSpeed;
+    }
+
 }
