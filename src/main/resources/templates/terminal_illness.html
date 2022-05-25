@@ -18,52 +18,44 @@
     class fileSystem {
       constructor() {
         this.files = {};
-
+        this.createDefaultFolders();
       }
 
       createDefaultFolders() {
-        this.mkdir("/usr")
+        this.mkdir("/usr");
       }
 
       mkdir(path) {
-        if(path.charAt(0) == '/') path = path.substring(1);
-
-        let paths = path.split('/');
-
-        let currentLoc = this.files;
-        for(let p of paths) {
-
-          currentLoc = currentLoc[p];
-        }
-
-        if(currentLoc.keys())) {
-          currectLoc[p] = {}
-        }
-
-
+        this.files[path] = {};
 
       }
     }
 
-  })()
+    $('body').terminal({
 
-  $('body').terminal({
+      hello: function(what) {
+        this.echo('Hello, ' + what +
+                '. Wellcome to this terminal.');
+      },
+      cat: function(what) {
+        this.echo('Hello, ' + what +
+                '. Wellcome to this terminal.');
+      },
+      ls: function() {
+        let fileSys = new fileSystem();
+        this.echo("Hi");
+        for(let i in fileSys.files) {
+          this.echo(i);
+        }
+      }
 
-    hello: function(what) {
-      this.echo('Hello, ' + what +
-              '. Wellcome to this terminal.');
-    },
-    cat: function(what) {
-      this.echo('Hello, ' + what +
-              '. Wellcome to this terminal.');
-    },
-    ls: function() {
-      this.echo('wonder_file.exe  super_tux.exe  music_classical.mp3')
-    }
+    }, {
+      greetings: 'My First Web Terminal'
+    });
 
-  }, {
-    greetings: 'My First Web Terminal'
-  });
+  })();
+
+
 </script>
 
 
