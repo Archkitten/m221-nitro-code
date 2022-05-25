@@ -1,21 +1,20 @@
 
 package com.nitrocode.api;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nitrocode.db.Database;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-
 import com.nitrocode.db.DBExpection;
+import com.nitrocode.db.Database;
 import com.nitrocode.db.Hashing;
 import com.nitrocode.sessions.sessionToken;
+
 
 @Controller
 public class DBApi {
@@ -48,7 +47,8 @@ public class DBApi {
     public String login(
         @RequestParam(name="username", required=true) String username, 
         @RequestParam(name="password", required=true) String password, 
-        HttpServletResponse response) {
+        HttpServletResponse response,
+        HttpServletRequest request) {
 
         // do nothing if username and password are empty
         if (username.isEmpty() || password.isEmpty()) {
@@ -83,11 +83,17 @@ public class DBApi {
         Cookie tokenCookie = new Cookie("token", token);
         tokenCookie.setMaxAge(Integer.MAX_VALUE);
 
+        // set tokenCookies domain to current domain
+        // get request domain
+        tokenCookie.setDomain(request.getServerName());
+        System.out.println(request.getServerName());
+        // tokenCookie.setDomain(".localhost");
+
         response.addCookie(
             tokenCookie
         );
 
-        Cookie usernameCookie = new Cookie("username", token);
+        Cookie usernameCookie = new Cookie("username", username);
         usernameCookie.setMaxAge(Integer.MAX_VALUE);
 
         response.addCookie(
