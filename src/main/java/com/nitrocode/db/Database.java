@@ -68,6 +68,16 @@ public class Database {
 				+ "		password TEXT"
 				+ ");");
 				stmt.close();
+
+				stmt = conn.createStatement();
+				// create a table in sqlite database with unique ID, unique username, a role, a nickname, and a password
+				stmt.executeUpdate(
+						"CREATE TABLE notes ("
+								+ "		id INTEGER PRIMARY KEY AUTOINCREMENT,"
+								+ "		username TEXT,"
+								+ "		note TEXT,"
+								+ ");");
+				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Error creating table: " + e.getMessage());
 			}
