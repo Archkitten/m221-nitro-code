@@ -27,12 +27,12 @@
     let startTime = null;
     let endTime = null;
 
-    const keyListener = document.addEventListener('keydown', ({key}) => {
+   document.addEventListener('keydown', ({key}) => {
         console.log(key);
         if(!startTime){
             startTime = new Date();
         }
-        if(key === cursorCharacter.innerText){
+        if(key === cursorCharacter.innerText){  //
             cursorCharacter.classList.remove('cursor');
             cursorCharacter.classList.add("done");
             cursorCharacter = characters[++cursorIndex];
