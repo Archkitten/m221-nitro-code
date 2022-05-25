@@ -1,30 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Typing</title>
-    <style>
-        .cursor{
-          background-color: aqua;
-        }
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
 
-        .done{
-            color: #bbb;
-        }
-
-        .typing{
-            margin: 0 auto;
-            width: 300px;
-        }
-    </style>
-
-
-
-
-</head>
-<body>
-<div id="stats"></div>
-<div id="typing"></div>
+<head><div layout:fragment="metadata" th:remove="tag">
+    <title>NitroCode | Leaderboard</title>
+</div></head>
+<body><div layout:fragment="content" th:remove="tag">
+<div class="stats" id="stats"></div>
+<div class="typer"  id="typing"></div>
 
 <script>
     const typingDiv = document.getElementById("typing")
@@ -73,5 +56,5 @@
 
 
 </script>
-</body>
+</div></body>
 </html>
