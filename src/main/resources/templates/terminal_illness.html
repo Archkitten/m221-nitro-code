@@ -13,6 +13,40 @@
 
 <body>
 <script>
+  (function() {
+
+    class fileSystem {
+      constructor() {
+        this.files = {};
+
+      }
+
+      createDefaultFolders() {
+        this.mkdir("/usr")
+      }
+
+      mkdir(path) {
+        if(path.charAt(0) == '/') path = path.substring(1);
+
+        let paths = path.split('/');
+
+        let currentLoc = this.files;
+        for(let p of paths) {
+
+          currentLoc = currentLoc[p];
+        }
+
+        if(currentLoc.keys())) {
+          currectLoc[p] = {}
+        }
+
+
+
+      }
+    }
+
+  })()
+
   $('body').terminal({
 
     hello: function(what) {
