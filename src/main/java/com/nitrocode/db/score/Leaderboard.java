@@ -2,12 +2,12 @@ package com.nitrocode.db.score;
 
 import java.util.*;
 
-public class Scoreboard {
+public class Leaderboard {
 
     private Map<Integer, Integer> playertoSpeedMapping;
     private Map<Integer, Set<Integer>> speedtoPlayerMapping;
 
-    public Scoreboard() {
+    public Leaderboard() {
         this.playertoSpeedMapping = new HashMap<>();
         this.speedtoPlayerMapping = new TreeMap<>(Collections.reverseOrder());
     }
