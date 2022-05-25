@@ -62,3 +62,20 @@ p{
   font-family: var(--font);
   border-radius: 8px;
 }
+
+.cursor{
+  background-color: orange;
+}
+
+.done{
+  color: #f68609;
+}
+
+.typing{
+  margin: 0 auto;
+  width: 300px;
+}
+
+.stats{
+  size: 48px;
+}

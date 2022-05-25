@@ -1,28 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Typing</title>
-    <style>
-        .cursor{
-          background-color: aqua;
-        }
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" lang="en">
 
-        .done{
-            color: #bbb;
-        }
-    </style>
-
-
-
-
-</head>
-<body>
-    <div id="typing"></div>
+<head><div layout:fragment="metadata" th:remove="tag">
+    <title>NitroCode | Leaderboard</title>
+</div></head>
+<body><div layout:fragment="content" th:remove="tag">
+<div class="stats" id="stats"></div>
+<div class="typer"  id="typing"></div>
 
 <script>
     const typingDiv = document.getElementById("typing")
-    console.log(typingDiv);
     const text = "Navodit was in csa on may 23"
 
     const characters = text.split('').map((char => {
@@ -36,18 +24,37 @@
     let  cursorCharacter = characters[cursorIndex];
     cursorCharacter.classList.add('cursor');
 
-    document.addEventListener('keydown', ({key}) => {
+    let startTime = null;
+    let endTime = null;
+
+    const keyListener = document.addEventListener('keydown', ({key}) => {
         console.log(key);
+        if(!startTime){
+            startTime = new Date();
+        }
         if(key === cursorCharacter.innerText){
             cursorCharacter.classList.remove('cursor');
             cursorCharacter.classList.add("done");
             cursorCharacter = characters[++cursorIndex];
-            cursorCharacter.classList.add("cursor");
+
         }
+        if(cursorIndex >= characters.length){
+            endTime = new Date();
+            const delta = endTime - startTime;
+            const seconds = delta / 1000;
+            const numberOfWords = text.split(" ").length;
+            const wps = numberOfWords / seconds;
+            const wpm = wps * 60.0;
+            document.getElementById('stats').innerText = `wpm = ${wpm}`
+            //display wpm
+            document.removeEventListener("keydown", keyListener);
+            return;
+        }
+        cursorCharacter.classList.add("cursor");
     })
 
 
 
 </script>
-</body>
+</div></body>
 </html>
