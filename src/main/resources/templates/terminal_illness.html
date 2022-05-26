@@ -22,14 +22,16 @@
       }
 
       createDefaultFolders() {
-        this.mkdir("/usr");
+        this.mkdir("/");
       }
 
       mkdir(path) {
         this.files[path] = {};
-
       }
     }
+
+    let fileSys = new fileSystem();
+    let currentDirectory = fileSys.files["/"]
 
     $('body').terminal({
 
@@ -42,11 +44,16 @@
                 '. Wellcome to this terminal.');
       },
       ls: function() {
-        let fileSys = new fileSystem();
         this.echo("Hi");
-        for(let i in fileSys.files) {
+        for(let i in currentDirectory) {
           this.echo(i);
         }
+      },
+      mkdir: function(directory) {
+        currentDirectory[directory] = {}
+      },
+      cd: function(directory) {
+        currentDirectory = currentDirectory[directory]
       }
 
     }, {
