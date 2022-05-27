@@ -18,6 +18,7 @@
       constructor() {
         this.name = "/";
         this.absolutePath = "/";
+        this.children = {};
       }
     }
 
@@ -63,18 +64,19 @@
       pwd: function() {
         this.echo(fileSys.pwd.absolutePath);
       },
-      // ls: function() {
-      //   this.echo("Hi");
-      //   for(let i in currentDirectory) {
-      //     this.echo(i);
-      //   }
-      // },
-      // mkdir: function(directory) {
-      //   currentDirectory[directory] = {}
-      // },
-      // cd: function(directory) {
-      //   currentDirectory = currentDirectory[directory]
-      // }
+      ls: function() {
+        for(let i in fileSys.pwd.children) {
+          this.echo(i);
+        }
+      },
+      mkdir: function(dir) {
+        let parent = fileSys.pwd;
+        fileSys.pwd.children[dir] = new directory(dir, parent)
+      },
+      cd: function(path) {
+        let parent = fileSys.pwd;
+        fileSys.pwd = parent.children[path]
+      }
 
     }, {
       greetings: 'My First Web Terminal'
