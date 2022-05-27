@@ -14,31 +14,41 @@
 <body>
 <script>
   (function() {
+    class rootDir {
+      constructor() {
+        this.name = "/";
+        this.absolutePath = "/";
+      }
+    }
 
-    class directory {
-      constructor(parent) {
+    class file {
+      constructor(name, parent) {
+        this.name = name;
         this.parent = parent;
+        this.absolutePath = this.parent.absolutePath + this.name
+      }
+    }
+
+    class directory extends file {
+      constructor(name, parent) {
+        super(name, parent);
         this.children = {};
       }
     }
 
     class fileSystem {
       constructor() {
-        this.files = {};
+        this.rootDir = new rootDir();
+        this.pwd = this.rootDir;
         this.createDefaultFolders();
       }
 
       createDefaultFolders() {
-        this.mkdir("/");
-      }
-
-      mkdir(path) {
-        this.files[path] = {};
+        // empty
       }
     }
 
     let fileSys = new fileSystem();
-    let currentDirectory = fileSys.files["/"]
 
     $('body').terminal({
 
@@ -50,18 +60,21 @@
         this.echo('Hello, ' + what +
                 '. Wellcome to this terminal.');
       },
-      ls: function() {
-        this.echo("Hi");
-        for(let i in currentDirectory) {
-          this.echo(i);
-        }
+      pwd: function() {
+        this.echo(fileSys.pwd.absolutePath);
       },
-      mkdir: function(directory) {
-        currentDirectory[directory] = {}
-      },
-      cd: function(directory) {
-        currentDirectory = currentDirectory[directory]
-      }
+      // ls: function() {
+      //   this.echo("Hi");
+      //   for(let i in currentDirectory) {
+      //     this.echo(i);
+      //   }
+      // },
+      // mkdir: function(directory) {
+      //   currentDirectory[directory] = {}
+      // },
+      // cd: function(directory) {
+      //   currentDirectory = currentDirectory[directory]
+      // }
 
     }, {
       greetings: 'My First Web Terminal'
