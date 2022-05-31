@@ -67,9 +67,13 @@
         this.echo('Hello, ' + what +
                 '. Wellcome to this terminal.');
       },
-      cat: function(what) {
-        this.echo('Hello, ' + what +
-                '. Wellcome to this terminal.');
+      help: function() {
+        this.echo('pwd - Prints the current working directory.');
+        this.echo('ls - Lists the files and directories within the current working directory.');
+        this.echo('mkdir {directory} - Creates a new directory.');
+        this.echo('cd {directory} - Move into a new directory.');
+        this.echo('cd .. - Go back to a previous directory.');
+        this.echo('cd / - Go back to the root directory (starting point).');
       },
       pwd: function() {
         this.echo(fileSys.pwd.absolutePath);
@@ -118,7 +122,7 @@
       }
 
     }, {
-      greetings: 'My First Web Terminal'
+      greetings: 'Linux Training Terminal - type "help" to begin!'
     });
 
   })();
