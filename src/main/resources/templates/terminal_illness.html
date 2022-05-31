@@ -46,7 +46,16 @@
       }
 
       createDefaultFolders() {
-        // empty
+        // /usr/
+        this.rootDir.children["usr"] = new directory("usr", this.rootDir)
+        // /usr/ubuntu/
+        this.rootDir.children["usr"].children["ubuntu"] = new directory("ubuntu", this.rootDir.children["usr"])
+        // /bin/
+        this.rootDir.children["bin"] = new directory("bin", this.rootDir)
+        // /dev/
+        this.rootDir.children["dev"] = new directory("dev", this.rootDir)
+        // /sys/
+        this.rootDir.children["sys"] = new directory("sys", this.rootDir)
       }
     }
 
@@ -83,7 +92,12 @@
         }
         // cd ..
         else if (path === "..") {
-          fileSys.pwd = currentDir.parent;
+          if (fileSys.pwd !== fileSys.rootDir) {
+            fileSys.pwd = currentDir.parent;
+          }
+          else {
+            this.echo("You are in the root directory!");
+          }
         }
         // cd anythingElse
         else{
