@@ -26,7 +26,7 @@
       constructor(name, parent) {
         this.name = name;
         this.parent = parent;
-        this.absolutePath = this.parent.absolutePath + this.name
+        this.absolutePath = this.parent.absolutePath + this.name + "/";
       }
     }
 
@@ -74,8 +74,27 @@
         fileSys.pwd.children[dir] = new directory(dir, parent)
       },
       cd: function(path) {
-        let parent = fileSys.pwd;
-        fileSys.pwd = parent.children[path]
+        let currentDir = fileSys.pwd;
+
+        // cd ..
+        if (path === "/") {
+          fileSys = new fileSystem();
+        }
+
+        // cd anythingElse
+        let pathExists = false;
+        for(let i in fileSys.pwd.children) {
+          if (path === i) {
+            pathExists = true;
+          }
+        }
+
+        if (pathExists === true) {
+          fileSys.pwd = currentDir.children[path]
+        }
+        else {
+          this.echo("Directory does not exist!");
+        }
       }
 
     }, {
