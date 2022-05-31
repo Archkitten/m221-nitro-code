@@ -14,13 +14,14 @@
 <body>
 <script>
   (function() {
-    class rootDir {
-      constructor() {
-        this.name = "/";
-        this.absolutePath = "/";
-        this.children = {};
-      }
-    }
+    // class rootDir extends file {
+    //   constructor(name, parent) {
+    //     super(name, parent);
+    //     this.name = "/";
+    //     this.absolutePath = "/";
+    //     this.children = {};
+    //   }
+    // }
 
     class file {
       constructor(name, parent) {
@@ -39,7 +40,7 @@
 
     class fileSystem {
       constructor() {
-        this.rootDir = new rootDir();
+        this.rootDir = new directory("/", "");
         this.pwd = this.rootDir;
         this.createDefaultFolders();
       }
@@ -76,24 +77,29 @@
       cd: function(path) {
         let currentDir = fileSys.pwd;
 
-        // cd ..
+        // cd /
         if (path === "/") {
-          fileSys = new fileSystem();
+          fileSys.pwd = fileSys.rootDir;
         }
-
+        // cd ..
+        else if (path === "..") {
+          fileSys.pwd = currentDir.parent;
+        }
         // cd anythingElse
-        let pathExists = false;
-        for(let i in fileSys.pwd.children) {
-          if (path === i) {
-            pathExists = true;
+        else{
+          let pathExists = false;
+          for(let i in fileSys.pwd.children) {
+            if (path === i) {
+              pathExists = true;
+            }
           }
-        }
 
-        if (pathExists === true) {
-          fileSys.pwd = currentDir.children[path]
-        }
-        else {
-          this.echo("Directory does not exist!");
+          if (pathExists === true) {
+            fileSys.pwd = currentDir.children[path]
+          }
+          else {
+            this.echo("Directory does not exist!");
+          }
         }
       }
 
