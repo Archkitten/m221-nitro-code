@@ -47,6 +47,10 @@
        if (key === 'Enter') {
            cursorCharacter = characters[cursorIndex += 1];
        }
+       if (key === 'Tab') {
+           cursorCharacter.classList.remove('cursor');
+           cursorCharacter = characters[cursorIndex += 1];
+       }
         else if(key === cursorCharacter.innerText){  //
             cursorCharacter.classList.remove('cursor');
             cursorCharacter.classList.add("done");
