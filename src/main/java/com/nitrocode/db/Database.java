@@ -88,6 +88,8 @@ public class Database {
 				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Error creating table: " + e.getMessage());
+			} catch (DBExpection e) {
+				System.err.println("Error when adding default admin: " + e.getMessage());
 			}
 		}
 	}

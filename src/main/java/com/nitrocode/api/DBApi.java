@@ -125,9 +125,9 @@ public class DBApi {
             return "{ \"status\": 401,\"message\": \"no token cookie found\" }";
         }
 
-        String sessionsToken = tokenCookie.getValue();
+        String token = tokenCookie.getValue();
 
-        if (sessionToken.isValid(username, sessionTokenHash)) {
+        if (sessionToken.isValid(username, token)) {
             sessionToken.remove(username);
         } else {
             return "{ \"status\": 401,\"message\": \"invalid token\" }";
