@@ -28,6 +28,8 @@ public class Database {
 	public static void init() {
 		boolean db_exists = new File(databasePath).isFile();
 
+		//System.out.println("shit");
+
 		// register the driver
 		try {
 			String sDriverName = "org.sqlite.JDBC";
@@ -84,6 +86,16 @@ public class Database {
 								+ "		id INTEGER PRIMARY KEY AUTOINCREMENT,"
 								+ "		username TEXT,"
 								+ "		note TEXT,"
+								+ ");");
+				stmt.close();
+
+				// Teacher table
+				stmt = conn.createStatement();
+				// create a table in sqlite database with unique ID, unique username, a role, a nickname, and a password
+				stmt.executeUpdate(
+						"CREATE TABLE assignments ("
+								+ "		username TEXT,"
+								+ "		assignment TEXT,"
 								+ ");");
 				stmt.close();
 			} catch (SQLException e) {
