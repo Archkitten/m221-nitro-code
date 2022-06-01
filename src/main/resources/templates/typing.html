@@ -7,18 +7,23 @@
 </div></head>
 <body><div layout:fragment="content" th:remove="tag">
 <div class="stats" id="stats"></div>
+    <pre>
 <div class="typer"  id="typing"></div>
+        </pre>
+<!--    <p id="html"></p>-->
 
 <script>
-    const texts = ["public class Main {\npublic static void main(String[] args) {\nSystem.out.println('Hello World');\n}\n}",
+    const texts = ["public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println('Hello World');\n\t}\n}",
         "System.out.println('Hello World!');",
-        "if (20 > 18) {\nSystem.out.println('20 is greater than 18');\n}",
-        "for (int i = 0; i < 5; i++) {\nSystem.out.println(i);\n}"];
+        "if (20 > 18) {\n\tSystem.out.println('20 is greater than 18');\n}",
+        "for (int i = 0; i < 5; i++) {\n\tSystem.out.println(i);\n}"];
 
     const typingDiv = document.getElementById("typing")
 
     const randomNumber = Math.floor(Math.random() * texts.length);
     const text = texts[randomNumber]
+    // const html = document.getElementById("html")
+    // const text = html.textContent
 
     const characters = text.split('').map((char => {
         const span = document.createElement("span");
