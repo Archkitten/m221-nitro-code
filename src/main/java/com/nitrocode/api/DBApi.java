@@ -108,15 +108,30 @@ public class DBApi {
     @ResponseBody
     public String logout(
         @RequestParam(name="username", required=true, defaultValue="...") String username, 
-        Model model) {
+        HttpServletRequest request) {
 
-        // logout
-        // try {
-        //     // Database.logout(username);
-        //     // todo
-        // } catch(DBExpection e) {
-        //     return "{ \"code\": 401,\"message\": \" " + e.getMessage() + "\" }";
-        // }
+        // extract all cookies from request 
+        Cookie[] cookies = request.getCookies();
+
+        // get cookie with name "token"
+        Cookie tokenCookie = null;
+        for(Cookie cookie : cookies) {
+            if(cookie.getName().equals("token")) {
+                tokenCookie = cookie;
+            }
+        }
+
+        if(tokenCookie == null) {
+            return "{ \"status\": 401,\"message\": \"no token cookie found\" }";
+        }
+
+        String sessionsToken = tokenCookie.getValue();
+
+        if (sessionToken.isValid(username, sessionTokenHash)) {
+            sessionToken.remove(username);
+        } else {
+            return "{ \"status\": 401,\"message\": \"invalid token\" }";
+        }
 
         return "{ \"status\": 200,\"message\": \"logout successful\" }";
     }
@@ -134,7 +149,7 @@ public class DBApi {
             Database.addUser(
                 username, 
                 password,
-                "user",
+                "user", // only 2 types of roles can exist: admin and user
                 nickname
             );
         } catch(DBExpection e) {

@@ -69,6 +69,14 @@ public class Database {
 				+ ");");
 				stmt.close();
 
+				// create one admin
+				addUser(
+					"admin", 
+					"admin",
+					"admin", // only 2 types of roles can exist: admin and user
+					"admin"
+				);
+
 				stmt = conn.createStatement();
 				// create a table in sqlite database with unique ID, unique username, a role, a nickname, and a password
 				stmt.executeUpdate(
