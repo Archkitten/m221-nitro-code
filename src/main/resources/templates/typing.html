@@ -10,8 +10,14 @@
 <div class="typer"  id="typing"></div>
 
 <script>
+    const texts = ["public class Main { public static void main(String[] args) {System.out.println("Hello World");}}",
+                   "System.out.println("Hello World!");",
+                   "if (20 > 18) {System.out.println("20 is greater than 18");}"];
+
     const typingDiv = document.getElementById("typing")
-    const text = "Navodit was in csa on may 23"
+
+    const randomNumber = Math.floor(Math.random() * texts.length);
+    const text = texts[randomNumber]
 
     const characters = text.split('').map((char => {
         const span = document.createElement("span");
