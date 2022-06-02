@@ -55,6 +55,17 @@
                     else {
                         document.getElementById("login").innerHTML = "Logout";
                     }
+                    let username = localStorage.getItem("username");
+                    if(username) {
+                        document.getElementById("login").innerHTML = "Logout";
+                        document.onclick = function(e) {
+                            localStorage.removeItem("username");
+                            document.getElementById("login").innerHTML = "Login";
+                            e.preventDefault();
+                        }
+                    }
+
+                    
                 </script>
             </li>
 

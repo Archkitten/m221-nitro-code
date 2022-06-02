@@ -141,7 +141,8 @@
                 function handleResponse(r) {
                     console.log(r);
                     if (r.status == 200) {
-                        // window.location.href = "/";
+                        localStorage.setItem("username", r.username);
+                        window.location.href = "/";
                     } else {
                         displayMessage(r.message);
                     }
