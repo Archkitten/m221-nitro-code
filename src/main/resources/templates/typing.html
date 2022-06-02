@@ -13,10 +13,10 @@
 <!--    <p id="html"></p>-->
 
 <script>
-    const texts = ["public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println('Hello World');\n\t}\n}",
-        "System.out.println('Hello World!');",
-        "if (20 > 18) {\n\tSystem.out.println('20 is greater than 18');\n}",
-        "for (int i = 0; i < 5; i++) {\n\tSystem.out.println(i);\n}"];
+    const texts = ['public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Hello World");\n\t}\n}',
+        'if (20 > 18) {\n\tSystem.out.println("20 is greater than 18");\n}',
+        'for (int i = 0; i < 5; i++) {\n\tSystem.out.println(i);\n}',
+    ];
 
     const typingDiv = document.getElementById("typing")
 
@@ -39,7 +39,8 @@
     let startTime = null;
     let endTime = null;
 
-   document.addEventListener('keydown', ({key}) => {
+   document.addEventListener('keydown', (event) => {
+       let {key} = event;
         console.log(key);
         if(!startTime){
             startTime = new Date();
@@ -47,9 +48,10 @@
        if (key === 'Enter') {
            cursorCharacter = characters[cursorIndex += 1];
        }
-       if (key === 'Tab') {
+       else if (key === 'Tab') {
            cursorCharacter.classList.remove('cursor');
            cursorCharacter = characters[cursorIndex += 1];
+           event.preventDefault();
        }
         else if(key === cursorCharacter.innerText){  //
             cursorCharacter.classList.remove('cursor');
