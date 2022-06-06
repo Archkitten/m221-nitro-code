@@ -1,13 +1,28 @@
 package com.nitrocode.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import com.nitrocode.notes.*;
+
+import java.util.List;
 
 @Controller  // HTTP requests are handled as a controller, using the @Controller annotation
 public class NotesController {
-    @GetMapping("/notes")
-    // CONTROLLER handles GET request for /binary, maps it to binary() and does variable bindings
-    public String controlFunction() {
-        return "notes"; // returns HTML VIEW (binary)
+    @GetMapping("/database/notes/{id}")
+    public String notes(@PathVariable("id") Long id, Model model) {
+        Person person = modelRepository.get(id);
+        List<Note> notes = noteRepository.findAllByPerson(person);
+        Note note = new Note();
+        note.setPerson(person);
+
+        for (Note n : notes)
+            n.setText(convertMarkdownToHTML(n.getText()));
+
+        model.addAttribute("person", person);
+        model.addAttribute("notes", notes);
+        model.addAttribute("note", note);
+        return "mvc/database/notes";
     }
 }
