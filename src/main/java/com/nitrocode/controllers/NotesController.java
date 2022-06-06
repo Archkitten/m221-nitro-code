@@ -18,10 +18,8 @@ public class NotesController {
     @Autowired
     private ModelRepository modelRepository;
 
-    @GetMapping("/database/notes/{id}")
+    @GetMapping("/notes")
     public String notes(@PathVariable("id") Long id, Model model) {
-
-        NoteViewController mmm = new NoteViewController();
 
         Person person = modelRepository.get(id);
         List<Note> notes = noteRepository.findAllByPerson(person);
@@ -29,11 +27,11 @@ public class NotesController {
         note.setPerson(person);
 
         for (Note n : notes)
-            n.setText(mmm.convertMarkdownToHTML(n.getText()));
+            n.setText(NoteViewController.convertMarkdownToHTML(n.getText()));
 
         model.addAttribute("person", person);
         model.addAttribute("notes", notes);
         model.addAttribute("note", note);
-        return "mvc/database/notes";
+        return "notes";
     }
 }
