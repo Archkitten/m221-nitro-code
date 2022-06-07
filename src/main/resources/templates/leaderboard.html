@@ -12,17 +12,40 @@
 <body><div layout:fragment="content" th:remove="tag">
     <!-- Start of body content specific to page -->
     <div id="spring_intro" class="articles" style="margin: 30px;">
-        <table>
+        <table id="time-table">
             <tr>
                 <th>Username</th>
-                <th>Fastest Time</th>
-            </tr>
-            <tr>
-                <td>Me</td>
-                <td>0.01 seconds</td>
+                <th>fastest time</th>
             </tr>
         </table>
     </div>
+    <script>
+        (function() {
+            // fetch the leaderboard from the server
+            fetch('/api/getspeed')
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    // update the leaderboard
+                    // data is a dictionary with username as key and fastest time as value
+
+                    // get the table
+                    const table = document.getElementById('time-table');
+
+                    for (let username in data) {
+                        let row = document.createElement('tr');
+                        let username_cell = document.createElement('td');
+                        let time_cell = document.createElement('td');
+                        username_cell.innerText = username;
+                        time_cell.innerText = data[username] + ' wpm';
+                        row.appendChild(username_cell);
+                        row.appendChild(time_cell);
+                        table.appendChild(row);
+                    }
+                });
+        })();
+    </script>
     <!-- End of body content specific to page -->
 </div></body>
 

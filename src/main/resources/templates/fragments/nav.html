@@ -60,15 +60,17 @@
                     }
                     let username = localStorage.getItem("username");
                     if(username) {
-                        document.getElementById("login").innerHTML = "Logout";
-                        document.onclick = function(e) {
+                        let loginButton = document.getElementById("login")
+                        loginButton.innerHTML = "Logout";
+                        loginButton.onclick = function(e) {
                             localStorage.removeItem("username");
                             document.getElementById("login").innerHTML = "Login";
+                            loginButton.onclick = function(e) {
+                                window.location.href = "/login";
+                            }
                             e.preventDefault();
                         }
                     }
-
-                    
                 </script>
             </li>
 

@@ -68,16 +68,47 @@
             const seconds = delta / 1000;
             const numberOfWords = text.split(" ").length;
             const wps = numberOfWords / seconds;
-            const wpm = wps * 60.0;
+            const wpm = Math.round(wps * 60.0);
             document.getElementById('stats').innerText = `wpm = ${wpm}`
             //display wpm
-            document.removeEventListener("keydown", keyListener);
+            // document.removeEventListener("keydown", keyListener);
+
+            // save to database if logged in 
+            let username = localStorage.getItem("username");
+            if(username) {
+                fetch(`/api/speed`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        speed: wpm
+                    })
+                }).then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    })
+            }
             return;
         }
         cursorCharacter.classList.add("cursor");
     })
 
+            // {
 
+            // let wpm = 69;
+
+            // let username = localStorage.getItem("username");
+            // if(username) {
+            //     fetch(`/api/speed`, {
+            //         method: "POST",
+            //         body: JSON.stringify({
+            //             speed: wpm.toString()
+            //         })
+            //     }).then(response => response.json())
+            //         .then(data => {
+            //             console.log(data);
+            //         })
+            // }
+
+            // }
 
 </script>
 </div></body>

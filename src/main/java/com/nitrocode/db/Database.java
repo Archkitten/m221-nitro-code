@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import com.nitrocode.db.DBExpection;
 import com.nitrocode.db.Hashing;
@@ -60,8 +61,9 @@ public class Database {
 		if (!db_exists) {
 			try {
 				Statement stmt = conn.createStatement();
+
 				// create a table in sqlite database with unique ID, unique username, a role, a nickname, and a password 
-				stmt.executeUpdate(
+				stmt.execute(
 				  "CREATE TABLE user_profiles ("
 				+ "		id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ "		username TEXT,"
@@ -69,6 +71,18 @@ public class Database {
 				+ "		nickname TEXT,"
 				+ "		password TEXT"
 				+ ");");
+				stmt.execute(
+				  "CREATE TABLE typing_speed ("
+				+ "		id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ "		username TEXT,"
+				+ "		speed TEXT"
+				+ ");");
+				stmt.execute(
+						"CREATE TABLE notes ("
+								+ "		id INTEGER PRIMARY KEY AUTOINCREMENT,"
+								+ "		username TEXT,"
+								+ "		note TEXT"
+								+ ");");
 				stmt.close();
 
 				// create one admin
@@ -79,25 +93,6 @@ public class Database {
 					"admin"
 				);
 
-				stmt = conn.createStatement();
-				// create a table in sqlite database with unique ID, unique username, a role, a nickname, and a password
-				stmt.executeUpdate(
-						"CREATE TABLE notes ("
-								+ "		id INTEGER PRIMARY KEY AUTOINCREMENT,"
-								+ "		username TEXT,"
-								+ "		note TEXT,"
-								+ ");");
-				stmt.close();
-
-				// Teacher table
-				stmt = conn.createStatement();
-				// create a table in sqlite database with unique ID, unique username, a role, a nickname, and a password
-				stmt.executeUpdate(
-						"CREATE TABLE assignments ("
-								+ "		username TEXT,"
-								+ "		assignment TEXT,"
-								+ ");");
-				stmt.close();
 			} catch (SQLException e) {
 				System.err.println("Error creating table: " + e.getMessage());
 			} catch (DBExpection e) {
@@ -175,4 +170,56 @@ public class Database {
 	public static void runTests() {
 		init();
 	}
+	
+	public static void setSpeed(String username, String speed) throws DBExpection {
+		// check if user already has a speed
+		if(get("typing_speed", username, "username").isEmpty()) {
+			String query = "INSERT INTO typing_speed" 
+							+ "(username, speed)"
+							+ "VALUES ('" 
+								+ username + "', '" 
+								+ speed 
+							+ "');";
+			try {
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate(query);
+				stmt.close();
+			} catch(SQLException e) {
+				throw new DBExpection("Error setting speed: " + e.getMessage());
+			}
+		} else {
+			// update speed if speed is larger than current speed
+			String currentSpeed = get("typing_speed", username, "speed");
+			if(Integer.parseInt(speed) > Integer.parseInt(currentSpeed)) {
+				String query = "UPDATE typing_speed SET speed = '" 
+								+ speed 
+								+ "' WHERE username = '" + username + "';";
+				try {
+					Statement stmt = conn.createStatement();
+					stmt.executeUpdate(query);
+					stmt.close();
+				} catch(SQLException e) {
+					throw new DBExpection("Error setting speed: " + e.getMessage());
+				}
+			}
+		}
+	}
+
+	// get all users
+	public static ArrayList<String> getAllUsers() throws DBExpection {
+		String query = "SELECT username FROM user_profiles;";
+		ArrayList<String> users = new ArrayList<String>();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				users.add(rs.getString("username"));
+			}
+			stmt.close();
+		} catch(SQLException e) {
+			throw new DBExpection("Error getting users: " + e.getMessage());
+		}
+		return users;
+	}
+
 }
