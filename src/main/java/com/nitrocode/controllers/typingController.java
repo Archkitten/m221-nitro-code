@@ -8,17 +8,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class typingController {
-    @GetMapping("/typing")
-
+    @GetMapping("/gettext")
+    @ResponseBody
     public String type(Model model) {
-        String[] texts = {"public class Main {\npublic static void main(String[] args) {\nSystem.out.println('Hello World');\n}\n}",
-                "System.out.println('Hello World!');",
-                "if (20 > 18) {\nSystem.out.println('20 is greater than 18');\n}",
-                "for (int i = 0; i < 5; i++) {\nSystem.out.println(i);\n}"};
+        String[] texts = {"public class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"Hello World\");\n\t}\n}",
+                "if (20 > 18) {\n\tSystem.out.println(\"20 is greater than 18\");\n}",
+                "for (int i = 0; i < 5; i++) {\n\tSystem.out.println(i);\n}",
+                "int i = 0;\nwhile (i < 5) {\n\tSystem.out.println(i);\n\ti++;\n}",
+                "int i = 0;\ndo {\n\tSystem.out.println(i);\n\ti++;\n} while (i < 5);",
+                "String[] cars = {\"Volvo\", \"BMW\", \"Ford\", \"Mazda\"};\ncars[0] = \"Opel\";\nSystem.out.println(cars[0]);\nSystem.out.println(cars.length);"};
         int randomNumber = (int)(Math.random() * texts.length);
-        String text = texts[randomNumber];
 
-        model.addAttribute("html", text);
+        return texts[randomNumber];
+    }
+
+    @GetMapping("/typing")
+    public String typing() {
         return "typing";
     }
 }
